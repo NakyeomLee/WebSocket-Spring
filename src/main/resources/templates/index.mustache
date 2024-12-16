@@ -21,11 +21,23 @@
 </ul>
 
 <script>
-    // setTimeout() : 일정 시간에 한번씩 동작
-    // 2000밀리세컨즈 : 2초
-    setTimeout(()=>{
-        location.reload(); // 새로고침
-    }, 2000);
+    setInterval(()=>{
+        chatList();
+    }, 2000); // 2000밀리세컨즈 = 2초
+
+    async function chatList(){
+        let response = await fetch("/api");
+        let responseBody = await response.json();
+
+        let site = document.querySelector("#chat-box");
+        site.innerHTML = "";
+
+        responseBody.forEach(chat=> {
+            let dom = document.createElement("li");
+            dom.innerText = chat.msg;
+            site.append(dom);
+        });
+    }
 </script>
 
 </body>
