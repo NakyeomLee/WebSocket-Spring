@@ -16,9 +16,9 @@ public class ChatService {
     // save든 findAll이든 리포지토리에 쿼리문 작성하지 않아도 알아서 불러다줌
 
     @Transactional
-    public void save(String msg) {
+    public Chat save(String msg) {
         Chat chat =  Chat.builder().msg(msg).build();
-        chatRepository.save(chat);
+        return chatRepository.save(chat);
     }
 
     public List<Chat> findAll() {
